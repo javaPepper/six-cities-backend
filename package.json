@@ -1,0 +1,30 @@
+{
+  "name": "six-cities-backend",
+  "version": "1.0.0",
+  "description": "API for the Six-Cities project",
+  "keywords": [
+    "rest",
+    "api",
+    "node.js"
+  ],
+  "main": "main.js",
+  "scripts": {
+    "dev": "tsc main.ts && nodemon main.js"
+  },
+  "devDependencies": {
+    "@types/node": "20.12.7",
+    "@typescript-eslint/eslint-plugin": "6.7.0",
+    "@typescript-eslint/parser": "6.7.0",
+    "eslint": "8.49.0",
+    "eslint-config-htmlacademy": "9.1.1",
+    "nodemon": "^3.1.4",
+    "rimraf": "5.0.1",
+    "ts-node": "10.9.2",
+    "typescript": "5.4.5"
+  },
+  "type": "module",
+  "engines": {
+    "node": "^20.0.0",
+    "npm": ">=10"
+  }
+}
