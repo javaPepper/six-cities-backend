@@ -9,6 +9,7 @@
   ],
   "main": "main.js",
   "scripts": {
+    "lint": "eslint src/ --ext .ts",
     "dev": "tsc main.ts && nodemon main.js"
   },
   "devDependencies": {
