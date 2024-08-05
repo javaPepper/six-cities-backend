@@ -1,19 +1,20 @@
 import { Container } from 'inversify';
 import 'reflect-metadata';
-
-import { AppConfig } from './appConfig/config.js';
-import { PinoLogger } from './logger/pino.logger.js';
 import { Application } from './rest/application.js';
-import { Component } from './types/component.enum.js';
-import { Schema } from './appConfig/schema.js';
-import { Config } from './appConfig/config.interface.js';
-import { Logger } from './logger/logger.interface.js';
+import { Component } from './types/components.enum.js';
+
+import { createAppContainer } from './rest/appContainer.js';
+import { createUserContainer } from './modules/user/userContainer.js';
+import { createOfferContainer } from './modules/offer/offerContainer.js';
 
 (async function() {
-  const container = new Container();
-  container.bind<Application>(Component.Application).to(Application).inSingletonScope();
-  container.bind<Config<Schema>>(Component.Config).to(AppConfig).inSingletonScope();
-  container.bind<Logger>(Component.Logger).to(PinoLogger).inSingletonScope();
-  const application = container.get<Application>(Component.Application);
+
+  const appContainer = Container.merge(
+	createAppContainer(),
+	createUserContainer(),
+	createOfferContainer());
+
+  const application = appContainer.get<Application>(Component.Application);
+
   await application.init();
 })();

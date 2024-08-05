@@ -1,6 +1,6 @@
 import { Logger as PinoInstance, pino, transport } from 'pino';
 import { Logger } from '../logger/logger.interface.js';
-import { getCurrentDirPath } from '../helpers/filePath.js';
+import { getCurrentDirPath } from '../utils/filePath.js';
 import { resolve } from 'node:path';
 import { injectable } from 'inversify';
 

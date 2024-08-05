@@ -3,7 +3,7 @@ import { Logger } from '../logger/logger.interface.js';
 import { Config } from './config.interface.js';
 import { appSchema, Schema } from './schema.js';
 import { inject, injectable } from 'inversify';
-import { Component } from '../types/component.enum.js';
+import { Component } from '../types/components.enum.js';
 
 
 @injectable()
