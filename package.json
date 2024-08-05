@@ -36,10 +36,12 @@
     "npm": ">=10"
   },
   "dependencies": {
+    "@typegoose/typegoose": "^12.6.0",
     "convict": "^6.2.4",
     "convict-format-with-validator": "^6.2.0",
     "dotenv": "^16.4.5",
     "inversify": "^6.0.2",
+    "mongoose": "^8.5.1",
     "pino": "^9.3.2",
     "reflect-metadata": "^0.2.2"
   }

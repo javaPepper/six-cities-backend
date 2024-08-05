@@ -4,25 +4,25 @@ import validator from 'convict-format-with-validator';
 convict.addFormats(validator);
 
 export type Schema = {
-	PORT: number,
-	SALT: string,
-	DB_HOST: string
+  SALT: string,
+  DB_USER: string,
+  DB_PASSWORD: string,
 }
 
 export const appSchema = convict<Schema>({
-  PORT: {
-    env: 'PORT',
-    default: 9999,
-    format: 'port'
-  },
   SALT: {
     env: 'SALT',
     format: String,
     default: ''
   },
-  DB_HOST: {
-    env: 'DB_HOST',
-    format: 'ipaddress',
-    default:'127.0.0.1'
-  }
+  DB_USER: {
+    env: 'DB_USER',
+    format: String,
+    default: null
+  },
+  DB_PASSWORD: {
+    env: 'DB_PASSWORD',
+    format: String,
+    default: null
+  },
 });
