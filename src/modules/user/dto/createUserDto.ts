@@ -1,4 +1,4 @@
-export class UserDto {
+export class createUserDto {
   public name!: string;
   public id!: string;
   public email!: string;
