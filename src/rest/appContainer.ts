@@ -4,7 +4,7 @@ import { Application } from './application.js';
 import { Logger } from '../logger/logger.interface.js';
 import { Component } from '../types/components.enum.js';
 import { AppConfig } from '../appConfig/config.js';
-import { PinoLogger } from '../logger/pino.logger.js';
+import { PinoLogger } from '../logger/pinoLogger.js';
 import { MongoDatabase } from '../database/mongoDatabase.js';
 import { Schema } from '../appConfig/schema.js';
 import { Config } from '../appConfig/config.interface.js';
