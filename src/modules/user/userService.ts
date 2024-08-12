@@ -16,7 +16,7 @@ export class DefaultUserService implements UserService {
   ){}
 
   public async create(dto: createUserDto, salt: string): Promise<DocumentType<UserEntity>> {
-    const user = new UserEntity(dto);
+    const user = new UserEntity({...dto});
     user.setPassword(dto.password, salt);
 
     const result = await this.userModel.create(user);
@@ -27,7 +27,7 @@ export class DefaultUserService implements UserService {
 
   public async findByEmail(email: string): Promise<DocumentType<UserEntity> | null> {
     return this.userModel
-	.findOne({email});
+      .findOne({email});
   }
 
   public async findOrCreate(dto: createUserDto, salt: string): Promise<DocumentType<UserEntity>> {
@@ -41,7 +41,7 @@ export class DefaultUserService implements UserService {
 
   public async updateById(dto: UpdateUserDto, userId: string): Promise<DocumentType<UserEntity> | null> {
 	return this.userModel
-	.findByIdAndUpdate(userId, dto, {new: true})
-	.exec();
+    .findByIdAndUpdate(userId, dto, {new: true})
+    .exec();
   }
 }

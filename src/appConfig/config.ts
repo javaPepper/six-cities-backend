@@ -11,16 +11,16 @@ export class AppConfig implements Config<Schema> {
   private readonly config: Schema;
 
   constructor(
-		@inject(Component.Logger) private readonly logger: Logger
+    @inject(Component.Logger) private readonly logger: Logger
   ) {
     const parsedOutput = config();
 
-    if(parsedOutput.error) {
+    if (parsedOutput.error) {
       throw new Error('Faled to read .env file. Be sure the file to be existed');
     }
 
     appSchema.load({});
-    appSchema.validate({allowed: 'strict', output: this.logger.info});
+    appSchema.validate({ allowed: 'strict', output: this.logger.info });
 
     this.config = appSchema.getProperties();
     this.logger.info('The .env file was successfully parsed');

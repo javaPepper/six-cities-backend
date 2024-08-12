@@ -16,7 +16,7 @@ export class PinoLogger implements Logger {
 
     const fileTransport = transport({
       target: 'pino/file',
-      options: {destination}
+      options: { destination }
     });
     this.logger = pino({}, fileTransport);
   }

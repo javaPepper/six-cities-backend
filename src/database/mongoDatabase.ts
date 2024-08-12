@@ -14,8 +14,8 @@ export class MongoDatabase implements Database {
   private isConnected: boolean;
 
   constructor(
-	@inject(Component.Logger) private readonly logger: Logger
-  ){
+    @inject(Component.Logger) private readonly logger: Logger
+  ) {
     this.isConnected = false;
   }
 
@@ -24,14 +24,14 @@ export class MongoDatabase implements Database {
   }
 
   public async connect(uri: string): Promise<void> {
-    if(this.isConnectedToDatabase()) {
+    if (this.isConnectedToDatabase()) {
       throw new Error('MongoDB client has already been established');
     }
 
     this.logger.info('Connecting to the MongoDb client...');
 
     let attempts = 0;
-    while(attempts < TRIES_COUNT) {
+    while (attempts < TRIES_COUNT) {
       try {
         this.mongoose = await Mongoose.connect(uri);
         this.isConnected = true;
@@ -48,7 +48,7 @@ export class MongoDatabase implements Database {
   }
 
   public async disconnect(): Promise<void> {
-    if(!this.isConnectedToDatabase()) {
+    if (!this.isConnectedToDatabase()) {
       throw new Error('Nothing to disconnect');
     }
 

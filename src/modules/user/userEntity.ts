@@ -2,27 +2,27 @@ import { defaultClasses, getModelForClass, modelOptions, prop } from '@typegoose
 import { UserType } from '../../types/userType.js';
 import { createSHA256 } from '../../utils/hash.js';
 
-export interface UserEntity extends defaultClasses.Base {}
+export interface UserEntity extends defaultClasses.Base { }
 
-  @modelOptions({
-    schemaOptions: {
-      collection: 'users',
-      timestamps: true
-    }
-  })
+@modelOptions({
+  schemaOptions: {
+    collection: 'users',
+    timestamps: true
+  }
+})
 
 export class UserEntity extends defaultClasses.TimeStamps implements UserType {
 
-  @prop({required: true, trim: true, default: ''})
+  @prop({ required: true, trim: true, default: '' })
   public name: string;
 
-  @prop({required: false, trim: true})
+  @prop({ required: false, trim: true })
   public avatarPath: string;
 
-  @prop({unique: true, required: true, trim: true})
+  @prop({ unique: true, required: true, trim: true })
   public email: string;
 
-  @prop({required: true})
+  @prop({ required: true })
   private password?: string;
 
   @prop({ required: true })
@@ -46,4 +46,4 @@ export class UserEntity extends defaultClasses.TimeStamps implements UserType {
   }
 }
 
-export const userModel = getModelForClass(UserEntity);
+export const UserModel = getModelForClass(UserEntity);

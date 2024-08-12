@@ -9,9 +9,9 @@ import { OfferDto } from './offerDto.js';
 export class DefaultOfferService implements OfferService {
 
   constructor(
-	@inject(Component.Logger) private readonly logger: Logger,
-	@inject(Component.OfferModel) private readonly offerModel: types.ModelType<OfferEntity>
-  ){}
+    @inject(Component.Logger) private readonly logger: Logger,
+    @inject(Component.OfferModel) private readonly offerModel: types.ModelType<OfferEntity>
+  ) { }
 
   public async create(dto: OfferDto): Promise<types.DocumentType<OfferEntity>> {
     const result = await this.offerModel.create(dto);
@@ -27,15 +27,15 @@ export class DefaultOfferService implements OfferService {
   public async findByOfferIdOrCreate(id: string, dto: OfferDto): Promise<types.DocumentType<OfferEntity>> {
     const existedOffer = await this.findByOfferId(id);
 
-    if(existedOffer) {
+    if (existedOffer) {
       return existedOffer;
     }
-	return this.offerModel.create(dto);
+    return this.offerModel.create(dto);
   }
 
   public async find(): Promise<types.DocumentType<OfferEntity>[]> {
-	return this.offerModel
-	.find()
-	.exec();
+    return this.offerModel
+      .find()
+      .exec();
   }
 }

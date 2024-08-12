@@ -9,12 +9,12 @@ import { setMongoDBUri } from '../utils/databaseUri.js';
 @injectable()
 export class Application {
   constructor(
-		@inject(Component.Logger) private readonly logger: Logger,
-		@inject(Component.Config) private readonly config: Config<Schema>,
+    @inject(Component.Logger) private readonly logger: Logger,
+    @inject(Component.Config) private readonly config: Config<Schema>,
     @inject(Component.MongoDatabase) private readonly database: Database
-  ){}
+  ) { }
 
-  private async connectDb(){
+  private async connectDb() {
     const mongoDbUri = setMongoDBUri(
       this.config.get('DB_USER'),
       this.config.get('DB_PASSWORD'),
