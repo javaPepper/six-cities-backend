@@ -24,5 +24,5 @@ export const appSchema = convict<Schema>({
     env: 'DB_PASSWORD',
     format: String,
     default: null
-  },
+  }
 });
