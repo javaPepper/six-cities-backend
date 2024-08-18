@@ -3,7 +3,7 @@ import { CommentEntity } from './comment.entity.js';
 import { CommentDto } from './commentDto.js';
 
 export interface CommentService {
-	create(dto: CommentDto): Promise<DocumentType<CommentEntity>>;
-	findByOfferId(offerId: string): Promise<DocumentType<CommentEntity>[]>
-	deleteCommentById(commentId: string): Promise<number | null>
+	create(dto: CommentDto): Promise<DocumentType<CommentEntity>>,
+	deleteCommentById(commentId: string, offerId: string): Promise<number | null>,
+	find(): Promise<DocumentType<CommentEntity>[]>
 }

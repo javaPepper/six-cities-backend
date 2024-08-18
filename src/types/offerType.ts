@@ -10,7 +10,7 @@ export type OfferType = {
 	goods: Goods,
 	host: UserType,
 	images: string[],
-	isFavorite: boolean,
+	isFavorite?: boolean,
 	isPremium: boolean,
 	location: LocationType,
 	maxAdults: number,

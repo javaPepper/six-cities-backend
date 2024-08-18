@@ -39,9 +39,6 @@ export class OfferEntity extends defaultClasses.TimeStamps implements OfferType 
 	public images!: string[];
 
 	@prop({ required: true })
-	public isFavorite!: boolean;
-
-	@prop({ required: true })
 	public isPremium!: boolean;
 
 	@prop({ required: true })
@@ -62,7 +59,7 @@ export class OfferEntity extends defaultClasses.TimeStamps implements OfferType 
 	@prop({ required: true })
 	public title!: string;
 
-	@prop({ required: true, type: () => Offer, enum: Offer })
+	@prop({ required: true, type: () => String, enum: Offer })
 	public type!: Offer;
 }
 
