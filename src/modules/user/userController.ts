@@ -6,13 +6,14 @@ import { Config } from '../../appConfig/config.interface.js';
 import { Schema } from '../../appConfig/schema.js';
 import { UserService } from './userService.interface.js';
 import { Response } from 'express';
-import { CreateUserRequest } from '../../types/createUserRequest.js';
+import { CreateEntityRequest } from '../../types/createEntityRequest.js';
 import { HttpError } from '../../rest/httpError.js';
 import { StatusCodes } from 'http-status-codes';
 import { fillDTO } from '../../utils/common.js';
 import { UserRdo } from './rdo/userRdo.js';
 import { HttpMethods } from '../../types/enums.js';
 import { LoginUserRequest } from '../../types/loginUserRequest.js';
+import { CreateUserDto } from './dto/createUserDto.js';
 
 @injectable()
 export class UserController extends BaseController {
@@ -27,7 +28,7 @@ export class UserController extends BaseController {
     }
 
     public async create(
-        { body }: CreateUserRequest,
+        { body }: CreateEntityRequest<CreateUserDto>,
         res: Response
     ): Promise<void> {
         const existedUser = await this.userService.findByEmail(body.email);

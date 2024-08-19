@@ -1,14 +1,25 @@
 import { inject } from 'inversify';
 import { OfferService } from './offerService.interface.js';
 import { Component } from '../../types/components.enum.js';
-import { types } from '@typegoose/typegoose';
+import { DocumentType, types } from '@typegoose/typegoose';
 import { OfferEntity } from './offerEntity.js';
+import { OfferDto } from './offerDto.js';
+import { Logger } from '../../logger/logger.interface.js';
 
 export class DefaultOfferService implements OfferService {
 
   constructor(
+    @inject(Component.Logger) private readonly logger: Logger,
     @inject(Component.OfferModel) private readonly offerModel: types.ModelType<OfferEntity>
   ) { }
+
+  public async create(dto: OfferDto): Promise<DocumentType<OfferEntity>> {
+
+    const result = await this.offerModel.create(dto);
+    this.logger.info(`New offer created: ${dto.title}`);
+
+    return result;
+  }
 
   public async getFavorites(): Promise<types.DocumentType<OfferEntity>[]> {
     return this.offerModel
