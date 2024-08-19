@@ -7,6 +7,7 @@ export type Schema = {
   SALT: string,
   DB_USER: string,
   DB_PASSWORD: string,
+  PORT: number
 }
 
 export const appSchema = convict<Schema>({
@@ -24,5 +25,10 @@ export const appSchema = convict<Schema>({
     env: 'DB_PASSWORD',
     format: String,
     default: null
+  },
+  PORT: {
+    env: 'PORT',
+    format: Number,
+    default: 3000
   }
 });
