@@ -23,3 +23,17 @@ export enum Goods {
 	TOWELS = 'Towels',
 	FRIDGE = 'Fridge'
 }
+
+export enum HttpMethods {
+	Get = 'get',
+	Post = 'post',
+	Patch = 'patch',
+	Put = 'put',
+	Delete = 'delete'
+}
+
+export enum ApplicationError {
+	ValidationError = 'VALIDATION_ERROR',
+	CommonError = 'COMMON_ERROR',
+	ServiceError = 'SERVICE_ERROR',
+  }

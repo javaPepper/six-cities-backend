@@ -13,7 +13,7 @@ export class DefaultUserService implements UserService {
   constructor(
     @inject(Component.Logger) private readonly logger: Logger,
     @inject(Component.UserModel) private readonly userModel: types.ModelType<UserEntity>
-  ){}
+  ) { }
 
   public async create(dto: createUserDto, salt: string): Promise<DocumentType<UserEntity>> {
     const user = new UserEntity(dto);
@@ -27,21 +27,21 @@ export class DefaultUserService implements UserService {
 
   public async findByEmail(email: string): Promise<DocumentType<UserEntity> | null> {
     return this.userModel
-	.findOne({email});
+      .findOne({ email });
   }
 
   public async findOrCreate(dto: createUserDto, salt: string): Promise<DocumentType<UserEntity>> {
     const existedUser = await this.findByEmail(dto.email);
 
-    if(existedUser) {
+    if (existedUser) {
       return existedUser;
     }
     return await this.create(dto, salt);
   }
 
   public async updateById(dto: UpdateUserDto, userId: string): Promise<DocumentType<UserEntity> | null> {
-	return this.userModel
-	.findByIdAndUpdate(userId, dto, {new: true})
-	.exec();
+    return this.userModel
+      .findByIdAndUpdate(userId, dto, { new: true })
+      .exec();
   }
 }
