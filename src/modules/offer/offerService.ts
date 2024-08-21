@@ -52,4 +52,9 @@ export class DefaultOfferService implements OfferService {
       .findByIdAndUpdate(offerId, { $set: { isFavorite: !isFavorite } })
       .exec();
   }
+
+  public async isExisted(documentId: string): Promise<boolean> {
+    return (await this.offerModel
+      .exists({_id: documentId})) !== null;
+  }
 }
