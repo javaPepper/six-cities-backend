@@ -8,6 +8,7 @@ import { setMongoDBUri } from '../utils/databaseUri.js';
 import express, { Express } from 'express';
 import { UserController } from '../modules/user/userController.js';
 import { OfferController } from '../modules/offer/offerController.js';
+import { CommentController } from '../modules/comment/commentController.js';
 
 @injectable()
 export class Application {
@@ -18,7 +19,8 @@ export class Application {
 		@inject(Component.Config) private readonly config: Config<Schema>,
     @inject(Component.MongoDatabase) private readonly database: Database,
     @inject(Component.UserController) private readonly userController: UserController,
-    @inject(Component.OfferController) private readonly offerController: OfferController
+    @inject(Component.OfferController) private readonly offerController: OfferController,
+    @inject(Component.CommentController) private readonly commentController: CommentController
   ){
     this.server = express();
   }
@@ -40,6 +42,7 @@ export class Application {
   private async initControllers() {
     this.server.use('/users', this.userController.router);
     this.server.use('/offers', this.offerController.router);
+    this.server.use('/comments', this.commentController.router);
   }
 
   private async initMiddleware() {

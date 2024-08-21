@@ -9,4 +9,5 @@ export interface OfferService {
 	findByOfferId(id: string): Promise<DocumentType<OfferEntity> | null>,
 	getFavorites(): Promise<DocumentType<OfferEntity>[]>,
 	toggleFavorite(offferId: string, isFavorite: boolean): Promise<DocumentType<OfferEntity> | null>,
+	isExisted(documentId: string): Promise<boolean>
 }
