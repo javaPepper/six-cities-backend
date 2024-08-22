@@ -12,15 +12,12 @@ import { fillDTO } from '../../utils/common.js';
 import { OfferRdo } from './offerRdo.js';
 import { CreateEntityRequest } from '../../types/createEntityRequest.js';
 import { OfferDto } from './offerDto.js';
-import { CommentService } from '../comment/commentService.interface.js';
-import { CommentRdo } from '../comment/commentRdo.js';
 
 @injectable()
 export class OfferController extends BaseController {
     constructor(
         @inject(Component.Logger) protected readonly logger: Logger,
         @inject(Component.OfferService) private readonly offerService: OfferService,
-        @inject(Component.CommentService) private readonly commentService: CommentService
     ) {
         super(logger);
 
@@ -29,7 +26,7 @@ export class OfferController extends BaseController {
         this.addRoute({
             path: '/:offerId',
             method: HttpMethods.Get,
-            handler: this.show
+            handler: this.show,
         });
 
         this.addRoute({
@@ -37,20 +34,13 @@ export class OfferController extends BaseController {
             method: HttpMethods.Get,
             handler: this.showOffers
         });
-
-        this.addRoute({
-            path: '/comments/:offerId',
-            method: HttpMethods.Get,
-            handler: this.showComments
-        });
-
     }
 
     public async show({ params }: Request<OfferIdParams>, res: Response): Promise<void> {
         const { offerId } = params;
         const offer = this.offerService.findByOfferId(offerId);
 
-        if(!offer) {
+        if (!offer) {
             throw new HttpError(
                 StatusCodes.NOT_FOUND,
                 `Offer with ${offerId} was not found`,
@@ -71,18 +61,5 @@ export class OfferController extends BaseController {
         const offer = await this.offerService.findByOfferId(result.id);
 
         this.created(res, fillDTO(OfferDto, offer));
-    }
-
-    public async showComments({params}: Request<OfferIdParams>, res: Response): Promise<void> {
-
-        if(!this.offerService.isExisted(params.offerId)) {
-            throw new HttpError(
-                StatusCodes.NOT_FOUND,
-                `Offer with ${params.offerId} was not found`,
-                'OfferController'
-            );
-        }
-        const comments = await this.commentService.findByOfferId(params.offerId);
-        this.ok(res, fillDTO(CommentRdo, comments));
     }
 }

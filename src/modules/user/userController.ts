@@ -24,7 +24,12 @@ export class UserController extends BaseController {
     ) {
         super(logger);
         this.logger.info('UserController\'s route registration');
-        this.addRoute({ path: '/register', method: HttpMethods.Post, handler: this.create });
+
+        this.addRoute({
+            path: '/register',
+            method: HttpMethods.Post,
+            handler: this.create
+        });
     }
 
     public async create(
@@ -51,7 +56,7 @@ export class UserController extends BaseController {
     ): Promise<void> {
         const existedUser = await this.userService.findByEmail(body.email);
 
-        if(!existedUser) {
+        if (!existedUser) {
             throw new HttpError(
                 StatusCodes.UNAUTHORIZED,
                 `User with email ${body.email} was not found`,

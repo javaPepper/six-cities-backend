@@ -9,6 +9,7 @@ import express, { Express } from 'express';
 import { UserController } from '../modules/user/userController.js';
 import { OfferController } from '../modules/offer/offerController.js';
 import { CommentController } from '../modules/comment/commentController.js';
+import { ExceptionFilter } from './exceptionFilter/exceptionFilter.interface.js';
 
 @injectable()
 export class Application {
@@ -20,7 +21,8 @@ export class Application {
     @inject(Component.MongoDatabase) private readonly database: Database,
     @inject(Component.UserController) private readonly userController: UserController,
     @inject(Component.OfferController) private readonly offerController: OfferController,
-    @inject(Component.CommentController) private readonly commentController: CommentController
+    @inject(Component.CommentController) private readonly commentController: CommentController,
+    @inject(Component.ExceptionFilter) private readonly exceptionFilter: ExceptionFilter
   ){
     this.server = express();
   }
@@ -49,6 +51,10 @@ export class Application {
     this.server.use(express.json());
   }
 
+  private async initExceptionFilters() {
+    this.server.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
+  }
+
   public async init() {
     await this.connectDb();
     this.logger.info('Application initialized');
@@ -58,6 +64,9 @@ export class Application {
 
     await this.initControllers();
     this.logger.info('Controller initialization completed');
+
+    await this.initExceptionFilters();
+    this.logger.info('ExceptionFilter initialized');
 
     await this.initServer();
     this.logger.info(`The server is on localhost:${this.config.get('PORT')}`);
